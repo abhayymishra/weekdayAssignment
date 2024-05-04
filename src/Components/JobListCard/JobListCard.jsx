@@ -37,7 +37,7 @@ const JobListCard = () => {
                   <strong>About us</strong>
                 </p>
                 <p>
-                  <span>
+                  <span className="fw-400">
                     Trumio is the world's first University Projects Ecosystem
                     platform enabling global clients to harness students,
                     professors, and institutional capabilities to speed priority
@@ -58,6 +58,23 @@ const JobListCard = () => {
               </div>
             </div>
           </div>
+          <div className="view-job-link">
+            <a href="#" className="fw-400">
+              View job
+            </a>
+          </div>
+          <div className="experience-required">
+            <h3>Minimum Experience</h3>
+            <h2>1 years</h2>
+          </div>
+        </div>
+        <div className="easy-apply-button-container">
+          <div className="easy-apply-button-block">
+            <button>⚡ Easy Apply</button>
+          </div>
+        </div>
+        <div className="unlock-referral-button">
+            <button>Unlock referral asks</button>
         </div>
       </div>
     </>

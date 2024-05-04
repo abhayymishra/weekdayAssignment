@@ -1,3 +1,7 @@
+.fw-400 {
+  font-weight: 400 !important;
+}
+
 .job-list-card {
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -105,4 +109,106 @@
 .about-company-whole-content {
   white-space: pre-wrap;
   font-size: 14px;
+}
+
+.view-job-link {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  position: relative;
+  top: -20px;
+}
+
+.view-job-link a {
+  color: #4943da;
+  text-decoration: none;
+  font-size: 14px !important;
+  cursor: pointer;
+}
+
+.experience-required {
+  margin-top: 10px;
+}
+
+.experience-required h3 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+  color: #8b8b8b;
+  margin-top: 10px;
+}
+
+.experience-required h2 {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.easy-apply-button-container {
+  flex-grow: 1;
+  width: 100%;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.easy-apply-button-block,
+.unlock-referral-button {
+  justify-content: space-between;
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.easy-apply-button-block button {
+  width: 100%;
+  background-color: rgb(85, 239, 196);
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 8px;
+  margin: 5px 0;
+  text-transform: capitalize;
+  font-size: 16px;
+  line-height: 1.75;
+  min-width: 64px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
+  border: 0;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.unlock-referral-button button {
+  width: 100%;
+  background-color: rgb(85, 239, 196);
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 8px;
+  margin: 5px 0;
+  text-transform: capitalize;
+  font-size: 16px;
+  line-height: 1.75;
+  min-width: 64px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
+  border: 0;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
