@@ -38,3 +38,71 @@
   line-height: 1.5;
   font-size: 9px;
 }
+
+.full-job-details {
+  width: 100%;
+  flex: 1 1 0%;
+  padding: 8px 16px;
+}
+
+.logo-with-company-name {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.logo-with-company-name img {
+  width: 25px;
+  height: 8px;
+}
+
+.company-info h3 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+  color: #8b8b8b;
+}
+
+.company-info h2 {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.job-location {
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.estimated-salary {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 8px 0;
+  color: rgb(77, 89, 106);
+  font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
+  line-height: 1.43;
+}
+
+.about-company-content {
+  height: 250px;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    rgb(255, 255, 255),
+    rgb(255, 255, 255),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.about-company-content > div p {
+  margin: 0px;
+  font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+  margin-bottom: 0 !important;
+}
+
+.about-company-whole-content {
+  white-space: pre-wrap;
+  font-size: 14px;
+}
