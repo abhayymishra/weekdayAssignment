@@ -1,0 +1,40 @@
+.job-list-card {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  border-radius: 20px;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px 0px !important;
+  overflow: hidden;
+  max-width: 360px;
+}
+
+.job-list-card:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.01);
+}
+
+.job-posted-how-much-ago {
+  display: flex;
+  width: 100%;
+  padding: 5px 0px;
+}
+
+.job-posted-time-block {
+  padding: 4px 6px;
+  box-shadow: rgba(6, 6, 6, 0.05) 0px 2px 6px 0px;
+  border-radius: 10px;
+  border: 1px solid rgb(230, 230, 230);
+}
+
+.job-posted-time-block p {
+  margin: 0px;
+  font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 9px;
+}
