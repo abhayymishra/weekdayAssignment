@@ -4,7 +4,7 @@ export const fetchJobData = createAsyncThunk("fetchJobData", async () => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   const body = JSON.stringify({
-    limit: 10,
+    limit: 947,
     offset: 0,
   });
 

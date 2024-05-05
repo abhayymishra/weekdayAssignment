@@ -122,38 +122,10 @@ const JobListCard = () => {
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector((state) => state.jobListCard);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isFetching, setIsFetching] = useState(false); // Track if data fetching is in progress
-  const [offset, setOffset] = useState(0); // T
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    function handleScroll() {
-      if (
-        window.innerHeight + document.documentElement.scrollTop !==
-          document.documentElement.offsetHeight ||
-        isLoading ||
-        isFetching
-      )
-        return;
-      setIsFetching(true);
-    }
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isLoading, isFetching]);
-
-  useEffect(() => {
-    if (!isFetching) return;
-    fetchMoreData();
-  }, [isFetching]);
-
-  const fetchMoreData = () => {
-    dispatch(fetchJobData({ offset: offset + 10 })); // Fetch more data with an increased offset
-    setOffset(offset + 10); // Update offset
-    setIsFetching(false); // Reset isFetching state
-  };
-
-  useEffect(() => {
-    dispatch(fetchJobData());
+    dispatch(fetchJobData({ offset: 0 }));
   }, [dispatch]);
   console.log(data);
 
@@ -162,9 +134,34 @@ const JobListCard = () => {
       setIsLoaded(true);
     }
   }, [isLoading]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+          document.documentElement.offsetHeight &&
+        !isLoading
+      ) {
+        setPage((prevPage) => prevPage + 1);
+        dispatch(fetchJobData({ offset: (page - 1) * 10 }));
+      }
+      console.log("scroll at last");
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [dispatch,isLoading , page]);
+
+  useEffect(() => {
+    if (page > 1) {
+      dispatch(fetchJobData({ offset: (page - 1) * 10 }));
+    }
+  }, [dispatch, page]);
   return (
     <>
-      {isLoading ? (
+      {isLoading && !data.length ? (
         <CustomLoader />
       ) : (
         data.jdList &&
@@ -249,6 +246,7 @@ const JobListCard = () => {
           );
         })
       )}
+      {isLoading && <CustomLoader />}
     </>
   );
 };
