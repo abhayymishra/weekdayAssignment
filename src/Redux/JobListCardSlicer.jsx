@@ -14,7 +14,7 @@ export const fetchJobData = createAsyncThunk("fetchJobData", async () => {
     body,
   };
 
-  fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions)
+  return fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions)
     .then((response) => response.text())
     .then((result) => console.log(result))
     .catch((error) => console.error(error));
