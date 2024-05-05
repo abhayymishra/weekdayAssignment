@@ -2,6 +2,10 @@
   font-weight: 400 !important;
 }
 
+.fs-14 {
+  font-size: 14px !important;
+}
+
 .job-list-card {
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -37,7 +41,7 @@
 
 .job-posted-time-block p {
   margin: 0px;
-  font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
+  font-family: "Lexend Deca", sans-serif;
   font-weight: 400;
   line-height: 1.5;
   font-size: 9px;
@@ -56,7 +60,7 @@
 
 .logo-with-company-name img {
   width: 25px;
-  height: 8px;
+  height: 25px;
 }
 
 .company-info h3 {
@@ -70,12 +74,14 @@
 .company-info h2 {
   font-size: 14px;
   line-height: 1.5;
+  text-transform: capitalize;
 }
 
 .job-location {
   font-size: 11px;
   font-weight: 500;
   margin-top: 5px;
+  text-transform: capitalize;
 }
 
 .estimated-salary {
@@ -83,7 +89,7 @@
   font-size: 14px;
   margin: 8px 0;
   color: rgb(77, 89, 106);
-  font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
+  font-family: "Lexend Deca", sans-serif;
   line-height: 1.43;
 }
 
@@ -105,7 +111,7 @@
 
 .about-company-content > div p {
   margin: 0px;
-  font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
+  font-family: "Lexend Deca", sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   font-weight: 500;
@@ -124,10 +130,11 @@
   top: 5px;
 }
 
-.view-job-link a {
+.view-job-link button {
   color: #4943da;
-  text-decoration: none;
+  background-color: transparent;
   font-size: 14px !important;
+  border: none;
   cursor: pointer;
 }
 
@@ -188,7 +195,7 @@
   vertical-align: middle;
   appearance: none;
   text-decoration: none;
-  font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
+  font-family: "Lexend Deca", sans-serif;
   border: 0;
   outline: none;
   display: inline-flex;
@@ -213,7 +220,7 @@
   vertical-align: middle;
   appearance: none;
   text-decoration: none;
-  font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
+  font-family: "Lexend Deca", sans-serif;
   border: 0;
   outline: none;
   display: inline-flex;

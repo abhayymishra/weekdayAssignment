@@ -122,7 +122,7 @@ const JobListCard = () => {
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector((state) => state.jobListCard);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [expandedId, setExpandedId] = useState({});
+  const [expandedStates, setExpandedStates] = useState({});
 
   useEffect(() => {
     dispatch(fetchJobData());
@@ -136,7 +136,7 @@ const JobListCard = () => {
   }, [isLoading]);
 
   const handleExpand = (id) => {
-    setExpandedId((prevState) => ({
+    setExpandedStates((prevState) => ({
       ...prevState,
       [id]: !prevState[id],
     }));
@@ -148,6 +148,7 @@ const JobListCard = () => {
       ) : (
         data.jdList &&
         data.jdList.map((jobCard) => {
+          const isExpanded = expandedStates[jobCard.id];
           if (
             !jobCard.companyName ||
             !jobCard.jobRole ||
@@ -173,7 +174,7 @@ const JobListCard = () => {
               </div>
               <div className="full-job-details">
                 <div className="logo-with-company-name">
-                  <img src="" alt="" />
+                  <img src={jobCard.logoUrl} alt={jobCard.companyName} />
                   <div>
                     <div className="company-info">
                       <h3>{jobCard.companyName}</h3>
@@ -183,7 +184,8 @@ const JobListCard = () => {
                   </div>
                 </div>
                 <p className="estimated-salary">
-                  Estimated Salary: ₹{jobCard.minJdSalary} - ₹
+                  Estimated Salary: {jobCard.salaryCurrencyCode}&nbsp;
+                  {jobCard.minJdSalary} - {jobCard.salaryCurrencyCode}&nbsp;
                   {jobCard.maxJdSalary} LPA{" "}
                   <span aria-label="Offered salary range" class="">
                     {" "}
@@ -193,7 +195,7 @@ const JobListCard = () => {
                 </p>
                 <div
                   className={`about-company-content ${
-                    expandedId[jobCard.id] ? "expanded" : ""
+                    isExpanded ? "expanded" : ""
                   }`}
                 >
                   <div>
@@ -203,7 +205,7 @@ const JobListCard = () => {
                         <strong>About us</strong>
                       </p>
                       <p>
-                        <span className="fw-400">
+                        <span className="fw-400 fs-14">
                           {jobCard.jobDetailsFromCompany}
                         </span>
                       </p>
@@ -211,13 +213,12 @@ const JobListCard = () => {
                   </div>
                 </div>
                 <div className="view-job-link">
-                  <a
-                    href="#"
+                  <button
                     className="fw-400"
                     onClick={() => handleExpand(jobCard.id)}
                   >
-                    {expandedId[jobCard.id] ? "Read Less.." : "Read More.."}
-                  </a>
+                    {isExpanded ? "Read Less.." : "Read More.."}
+                  </button>
                 </div>
                 <div className="experience-required">
                   <h3>Minimum Experience</h3>
