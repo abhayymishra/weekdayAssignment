@@ -109,8 +109,8 @@ const JobCardListSlice = createSlice({
     builder.addCase(fetchJobData.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = [...state.data, ...action.payload.jdList];
-      // state.offset += state.limit; // update offset
-      state.hasMore = action.payload.length === state.limit;
+       state.offset += state.limit; // update offset
+      state.hasMore = action.payload.jdList.length === state.limit;
     });
     builder.addCase(fetchJobData.rejected, (state, action) => {
       state.error = true;

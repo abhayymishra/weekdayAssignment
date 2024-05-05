@@ -126,35 +126,7 @@ const JobListCard = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 
-  // useEffect(() => {
-  //   if (!isLoading && hasMore) {
-  //     const handleScroll = () => {
-  //       if (
-  //         window.innerHeight + document.documentElement.scrollTop ===
-  //         document.documentElement.offsetHeight
-  //       ) {
-  //         setIsFetchingMore(true);
-  //       }
-  //     };
-  //     window.addEventListener("scroll", handleScroll);
-  //     return () => {
-  //       window.removeEventListener("scroll", handleScroll);
-  //     };
-  //   }
-  // }, [isLoading, hasMore]);
-
-  // useEffect(() => {
-  //   if (isFetchingMore) {
-  //     dispatch(fetchJobData({ offset: data.length, limit: 10 }));
-  //     setIsFetchingMore(false);
-  //   }
-  // }, [isFetchingMore, dispatch]);
-
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     setIsLoaded(true);
-  //   }
-  // }, [isLoading]);
+ 
 
   useEffect(() => {
     // Dispatch fetchJobData initially to fetch the first batch of data
