@@ -1,0 +1,11 @@
+main {
+  margin: 100px auto 0 auto;
+  max-width: 1300px;
+}
+
+main > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  row-gap: 50px;
+}

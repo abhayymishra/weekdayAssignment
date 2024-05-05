@@ -5,7 +5,17 @@ import JobListCard from "../JobListCard/JobListCard";
 const MainComponent = () => {
   return (
     <>
-      <JobListCard />
+      <main>
+        <div>
+          <JobListCard />
+          <JobListCard />
+          <JobListCard />
+          <JobListCard />
+          <JobListCard />
+          <JobListCard />
+          <JobListCard />
+        </div>
+      </main>
     </>
   );
 };

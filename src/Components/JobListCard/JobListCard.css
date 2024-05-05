@@ -15,6 +15,7 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px 0px !important;
   overflow: hidden;
   max-width: 360px;
+  
 }
 
 .job-list-card:hover {
@@ -161,6 +162,10 @@
   width: 100%;
 }
 
+.unlock-referral-button {
+  padding: 0 15px;
+}
+
 .easy-apply-button-block button {
   width: 100%;
   background-color: rgb(85, 239, 196);
@@ -189,13 +194,12 @@
 
 .unlock-referral-button button {
   width: 100%;
-  background-color: rgb(85, 239, 196);
-  color: rgb(0, 0, 0);
+  background-color: rgb(55, 52, 211);
+  color: #fff;
   font-weight: 500;
   padding: 8px 18px;
   border-radius: 8px;
   margin: 5px 0;
-  text-transform: capitalize;
   font-size: 16px;
   line-height: 1.75;
   min-width: 64px;
