@@ -120,14 +120,70 @@ import CustomLoader from "../CustomLoader/CustomLoader";
 
 const JobListCard = () => {
   const dispatch = useDispatch();
-  const { isLoading, data } = useSelector((state) => state.jobListCard);
+  const { isLoading, data, offset, limit, hasMore } = useSelector(
+    (state) => state.jobListCard
+  );
   const [isLoaded, setIsLoaded] = useState(false);
-  const [page, setPage] = useState(1);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+
+  // useEffect(() => {
+  //   if (!isLoading && hasMore) {
+  //     const handleScroll = () => {
+  //       if (
+  //         window.innerHeight + document.documentElement.scrollTop ===
+  //         document.documentElement.offsetHeight
+  //       ) {
+  //         setIsFetchingMore(true);
+  //       }
+  //     };
+  //     window.addEventListener("scroll", handleScroll);
+  //     return () => {
+  //       window.removeEventListener("scroll", handleScroll);
+  //     };
+  //   }
+  // }, [isLoading, hasMore]);
+
+  // useEffect(() => {
+  //   if (isFetchingMore) {
+  //     dispatch(fetchJobData({ offset: data.length, limit: 10 }));
+  //     setIsFetchingMore(false);
+  //   }
+  // }, [isFetchingMore, dispatch]);
+
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     setIsLoaded(true);
+  //   }
+  // }, [isLoading]);
 
   useEffect(() => {
-    dispatch(fetchJobData({ offset: 0 }));
+    // Dispatch fetchJobData initially to fetch the first batch of data
+    dispatch(fetchJobData({ offset: 0, limit: 10 }));
   }, [dispatch]);
-  console.log(data);
+
+  useEffect(() => {
+    if (!isLoading && hasMore) {
+      const handleScroll = () => {
+        if (
+          window.innerHeight + document.documentElement.scrollTop ===
+          document.documentElement.offsetHeight
+        ) {
+          setIsFetchingMore(true);
+        }
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [isLoading, hasMore]);
+
+  useEffect(() => {
+    if (isFetchingMore) {
+      dispatch(fetchJobData({ offset: offset + limit, limit: 10 }));
+      setIsFetchingMore(false);
+    }
+  }, [isFetchingMore, dispatch, offset, limit]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -135,33 +191,9 @@ const JobListCard = () => {
     }
   }, [isLoading]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop ===
-          document.documentElement.offsetHeight &&
-        !isLoading
-      ) {
-        setPage((prevPage) => prevPage + 1);
-        dispatch(fetchJobData({ offset: (page - 1) * 10 }));
-      }
-      console.log("scroll at last");
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [dispatch,isLoading , page]);
-
-  useEffect(() => {
-    if (page > 1) {
-      dispatch(fetchJobData({ offset: (page - 1) * 10 }));
-    }
-  }, [dispatch, page]);
   return (
     <>
-      {isLoading && !data.length ? (
+      {isLoading ? (
         <CustomLoader />
       ) : (
         data.jdList &&
@@ -246,7 +278,6 @@ const JobListCard = () => {
           );
         })
       )}
-      {isLoading && <CustomLoader />}
     </>
   );
 };
