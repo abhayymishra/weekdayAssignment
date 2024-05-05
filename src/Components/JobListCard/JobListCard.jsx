@@ -5,23 +5,19 @@ import { fetchJobData } from "../../Redux/JobListCardSlicer";
 
 const JobListCard = () => {
   const dispatch = useDispatch();
-  const { isLoading, jdList, error } = useSelector(
-    (state) => state.jobListCard
-  );
+  const { isLoading, data, error } = useSelector((state) => state.jobListCard);
 
   useEffect(() => {
     dispatch(fetchJobData());
-  }, []);
-  console.log(jdList);
+  }, [dispatch]);
+  console.log(data);
   return (
     <>
       {isLoading ? (
         <h1>loading...</h1>
-      ) : error ? (
-        <div>Error occurred: {error}</div>
       ) : (
-        jdList &&
-        jdList.map((jobCard) => {
+        data.jdList &&
+        data.jdList.map((jobCard) => {
           if (
             !jobCard.companyName ||
             !jobCard.jobRole ||

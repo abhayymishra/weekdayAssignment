@@ -35,7 +35,7 @@ const JobCardListSlice = createSlice({
   name: "jobListCard",
   initialState: {
     isLoading: false,
-    jdList: [],
+    data: [],
     error: false,
   },
 
@@ -45,7 +45,7 @@ const JobCardListSlice = createSlice({
     });
     builder.addCase(fetchJobData.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.jdList = action.payload;
+      state.data = action.payload;
     });
     builder.addCase(fetchJobData.rejected, (state, action) => {
       state.error = true;
