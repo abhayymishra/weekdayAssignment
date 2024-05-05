@@ -120,42 +120,14 @@ import CustomLoader from "../CustomLoader/CustomLoader";
 
 const JobListCard = () => {
   const dispatch = useDispatch();
-  const { isLoading, data, offset, limit, hasMore } = useSelector(
-    (state) => state.jobListCard
-  );
+  const { isLoading, data } = useSelector((state) => state.jobListCard);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isFetchingMore, setIsFetchingMore] = useState(false);
-
- 
+  const [expandedId, setExpandedId] = useState({});
 
   useEffect(() => {
-    // Dispatch fetchJobData initially to fetch the first batch of data
-    dispatch(fetchJobData({ offset: 0, limit: 10 }));
+    dispatch(fetchJobData());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (!isLoading && hasMore) {
-      const handleScroll = () => {
-        if (
-          window.innerHeight + document.documentElement.scrollTop ===
-          document.documentElement.offsetHeight
-        ) {
-          setIsFetchingMore(true);
-        }
-      };
-      window.addEventListener("scroll", handleScroll);
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }
-  }, [isLoading, hasMore]);
-
-  useEffect(() => {
-    if (isFetchingMore) {
-      dispatch(fetchJobData({ offset: offset + limit, limit: 10 }));
-      setIsFetchingMore(false);
-    }
-  }, [isFetchingMore, dispatch, offset, limit]);
+  console.log(data);
 
   useEffect(() => {
     if (!isLoading) {
@@ -163,6 +135,12 @@ const JobListCard = () => {
     }
   }, [isLoading]);
 
+  const handleExpand = (id) => {
+    setExpandedId((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
+  };
   return (
     <>
       {isLoading ? (
@@ -213,7 +191,11 @@ const JobListCard = () => {
                   </span>
                   <br />
                 </p>
-                <div className="about-company-content">
+                <div
+                  className={`about-company-content ${
+                    expandedId[jobCard.id] ? "expanded" : ""
+                  }`}
+                >
                   <div>
                     <p>About Company:</p>
                     <div className="about-company-whole-content">
@@ -229,8 +211,12 @@ const JobListCard = () => {
                   </div>
                 </div>
                 <div className="view-job-link">
-                  <a href={jobCard.jdLink} className="fw-400">
-                    View job
+                  <a
+                    href="#"
+                    className="fw-400"
+                    onClick={() => handleExpand(jobCard.id)}
+                  >
+                    {expandedId[jobCard.id] ? "Read Less.." : "Read More.."}
                   </a>
                 </div>
                 <div className="experience-required">

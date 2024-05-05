@@ -97,6 +97,12 @@
   );
 }
 
+.about-company-content.expanded {
+  height: auto;
+  overflow: auto;
+  mask-image: none;
+}
+
 .about-company-content > div p {
   margin: 0px;
   font-family: __LexendFont_7838d2, __LexendFont_Fallback_7838d2;
@@ -115,7 +121,7 @@
   text-align: center;
   margin-bottom: 0.5rem;
   position: relative;
-  top: -20px;
+  top: 5px;
 }
 
 .view-job-link a {
