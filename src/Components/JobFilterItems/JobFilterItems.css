@@ -1,0 +1,7 @@
+header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 60px auto 0 auto;
+  max-width: 1160px;
+}

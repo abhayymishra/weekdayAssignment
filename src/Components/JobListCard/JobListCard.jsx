@@ -165,7 +165,7 @@ const JobListCard = () => {
           return (
             <div
               className={`job-list-card ${isLoaded ? "loaded" : ""}`}
-              key={jobCard.id}
+              key={jobCard.jdUid}
             >
               <div className="job-posted-how-much-ago">
                 <div className="job-posted-time-block">
