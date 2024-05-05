@@ -5,12 +5,14 @@ import { fetchJobData } from "../../Redux/JobListCardSlicer";
 
 const JobListCard = () => {
   const dispatch = useDispatch();
-  const { isLoading, data, error } = useSelector((state) => state.jobListCard);
+  const { isLoading, jdList, error } = useSelector(
+    (state) => state.jobListCard
+  );
 
   useEffect(() => {
     dispatch(fetchJobData());
   }, []);
-  console.log(data);
+  console.log(jdList);
   return (
     <>
       {isLoading ? (
@@ -18,8 +20,21 @@ const JobListCard = () => {
       ) : error ? (
         <div>Error occurred: {error}</div>
       ) : (
-        data &&
-        data.map((jobCard) => {
+        jdList &&
+        jdList.map((jobCard) => {
+          if (
+            !jobCard.companyName ||
+            !jobCard.jobRole ||
+            !jobCard.location ||
+            !jobCard.minJdSalary ||
+            !jobCard.maxJdSalary ||
+            !jobCard.jobDetailsFromCompany ||
+            !jobCard.jdLink ||
+            !jobCard.minExp
+          ) {
+            // Skip rendering the job card if any detail is empty
+            return null;
+          }
           return (
             <div className="job-list-card">
               <div className="job-posted-how-much-ago">
@@ -32,14 +47,15 @@ const JobListCard = () => {
                   <img src="" alt="" />
                   <div>
                     <div className="company-info">
-                      <h3>Atlassian</h3>
+                      <h3>{jobCard.companyName}</h3>
                       <h2>{jobCard.jobRole}</h2>
                     </div>
-                    <p className="job-location">India</p>
+                    <p className="job-location">{jobCard.location}</p>
                   </div>
                 </div>
                 <p className="estimated-salary">
-                  Estimated Salary: ₹15 - 25 LPA{" "}
+                  Estimated Salary: ₹{jobCard.minJdSalary} - ₹
+                  {jobCard.maxJdSalary} LPA{" "}
                   <span aria-label="Offered salary range" class="">
                     {" "}
                     ✅
@@ -55,36 +71,20 @@ const JobListCard = () => {
                       </p>
                       <p>
                         <span className="fw-400">
-                          Trumio is the world's first University Projects
-                          Ecosystem platform enabling global clients to harness
-                          students, professors, and institutional capabilities
-                          to speed priority project execution for their
-                          business. Next-generation talent organized as teams
-                          with diverse skills, find and deliver impactful
-                          outcomes working within a secure project environment
-                          on Trumio. With AI- assistance built into each process
-                          step - Trumio makes it easy for clients and teams to
-                          stay on track, collaborate, and achieve desired
-                          project outcomes. Beyond achieving project goals,
-                          clients, students, and universities benefit from
-                          deeper engagement, a positive reputation, and
-                          nurturing a vibrant future talent pipeline. Overall,
-                          Trumio's mission is to build an equitable future of
-                          work, where client and talent engagement and access
-                          are truly democratized.
+                          {jobCard.jobDetailsFromCompany}
                         </span>
                       </p>
                     </div>
                   </div>
                 </div>
                 <div className="view-job-link">
-                  <a href="#" className="fw-400">
+                  <a href={jobCard.jdLink} className="fw-400">
                     View job
                   </a>
                 </div>
                 <div className="experience-required">
                   <h3>Minimum Experience</h3>
-                  <h2>1 years</h2>
+                  <h2>{jobCard.minExp} years</h2>
                 </div>
               </div>
               <div className="easy-apply-button-container">

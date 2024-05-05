@@ -14,17 +14,28 @@ export const fetchJobData = createAsyncThunk("fetchJobData", async () => {
     body,
   };
 
-  return fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
+  try {
+    const response = await fetch(
+      "https://api.weekday.technology/adhoc/getSampleJdJSON",
+      requestOptions
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch job data");
+    }
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 });
 
 const JobCardListSlice = createSlice({
   name: "jobListCard",
   initialState: {
     isLoading: false,
-    data: [],
+    jdList: [],
     error: false,
   },
 
@@ -34,7 +45,7 @@ const JobCardListSlice = createSlice({
     });
     builder.addCase(fetchJobData.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data = action.payload;
+      state.jdList = action.payload;
     });
     builder.addCase(fetchJobData.rejected, (state, action) => {
       state.error = true;
