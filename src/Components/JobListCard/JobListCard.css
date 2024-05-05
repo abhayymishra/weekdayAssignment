@@ -15,7 +15,6 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px 0px !important;
   overflow: hidden;
   max-width: 360px;
-  
 }
 
 .job-list-card:hover {
@@ -215,4 +214,17 @@
   align-items: center;
   justify-content: center;
   position: relative;
+}
+
+.loaded {
+  animation: blurAnimation 0.5s ease-in-out;
+}
+
+@keyframes blurAnimation {
+  from {
+    filter: blur(5px);
+  }
+  to {
+    filter: blur(0);
+  }
 }
