@@ -1,5 +1,7 @@
 # Candidate Application Platform - WeekDay
 
+* Its a smooth and engaging UI , also enhancing the user-experience , given proper loading indicator while data fetching at each point.Right now , filtering functionality is not working properly , but I will implement it.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

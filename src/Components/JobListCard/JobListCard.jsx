@@ -5,7 +5,7 @@ import { fetchJobData } from "../../Redux/JobListCardSlicer";
 import CustomLoader from "../CustomLoader/CustomLoader";
 
 const JobListCard = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // api content fetched
   const { isLoading, data, hasMore } = useSelector(
     (state) => state.jobListCard
   );
@@ -17,6 +17,7 @@ const JobListCard = () => {
   const [expandedStates, setExpandedStates] = useState({});
 
   const handleToggleExpand = (id) => {
+    // toggles the read more.. button inside card
     setExpandedStates((prevExpandedStates) => ({
       ...prevExpandedStates,
       [id]: !prevExpandedStates[id],
@@ -24,12 +25,14 @@ const JobListCard = () => {
   };
 
   useEffect(() => {
+    // fetches the job card data from api in batch of 10 cards per page.
     setIsLoaded(false);
     dispatch(fetchJobData({ limit, offset }));
   }, [dispatch, offset, limit]);
   console.log(data);
 
   const lastJobCardRef = useCallback(
+    //  handling the infinite scrolling
     (node) => {
       if (isLoading) return;
       if (observer.current) observer.current.disconnect();
@@ -45,21 +48,23 @@ const JobListCard = () => {
   );
 
   useEffect(() => {
+    // handles the loader before the data is loaded from api
     if (!isLoading) {
       setIsLoaded(true);
     }
   }, [isLoading]);
+
+  // the job card component with mapped data from api
   return (
     <>
       {isLoading && offset === 0 ? (
-        <CustomLoader />
+        <CustomLoader /> // display loader component at the time when data is fetching from api
       ) : (
         data &&
         data.slice(0, limit).map((jobCard) => {
-          // const isExpanded = expandedIds.includes(jobCard.id);
           const isExpanded = expandedStates[jobCard.id] || false;
           if (
-            !jobCard.companyName ||
+            !jobCard.companyName || // for all values which are null or undefined in api
             !jobCard.jobRole ||
             !jobCard.location ||
             !jobCard.minJdSalary ||
@@ -84,7 +89,11 @@ const JobListCard = () => {
               </div>
               <div className="full-job-details">
                 <div className="logo-with-company-name">
-                  <img src={jobCard.logoUrl} alt={jobCard.companyName} loading="lazy"/>
+                  <img
+                    src={jobCard.logoUrl}
+                    alt={jobCard.companyName}
+                    loading="lazy"
+                  />
                   <div>
                     <div className="company-info">
                       <h3>{jobCard.companyName}</h3>
@@ -148,6 +157,7 @@ const JobListCard = () => {
           );
         })
       )}
+       {/* display loader component at the time when data is fetching from api */}
       {isLoading && <CustomLoader />}
     </>
   );

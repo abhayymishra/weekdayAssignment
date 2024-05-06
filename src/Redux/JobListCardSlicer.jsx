@@ -18,7 +18,7 @@ export const fetchJobData = createAsyncThunk(
 
     try {
       const response = await fetch(
-        "https://api.weekday.technology/adhoc/getSampleJdJSON",
+        "https://api.weekday.technology/adhoc/getSampleJdJSON", // given api
         requestOptions
       );
       if (!response.ok) {
@@ -47,7 +47,7 @@ const JobCardListSlice = createSlice({
     builder.addCase(fetchJobData.pending, (state, action) => {
       state.isLoading = true;
     });
-    builder.addCase(fetchJobData.fulfilled, (state, action) => {
+    builder.addCase(fetchJobData.fulfilled, (state, action) => { // handles the infinite scrolling while data fetching
       state.isLoading = false;
       state.data = [...state.data, ...action.payload.data.jdList];
       state.hasMore = action.payload.totalCount > state.data.length;
