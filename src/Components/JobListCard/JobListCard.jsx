@@ -245,7 +245,7 @@
 
 // export default JobListCard;
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import "./JobListCard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobData } from "../../Redux/JobListCardSlicer";
@@ -258,17 +258,27 @@ const JobListCard = () => {
   );
   const [isLoaded, setIsLoaded] = useState(false);
   const [offset, setOffset] = useState(0);
+  const observer = useRef();
 
   useEffect(() => {
+    setIsLoaded(false);
     dispatch(fetchJobData({ limit: 10, offset }));
   }, [dispatch, offset]);
   console.log(data);
 
-  const handleScroll = () => {
-    if (hasMore && !isLoading) {
-      setOffset(offset + 10);
-    }
-  };
+  const lastJobCardRef = useCallback(
+    (node) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setOffset((prevOffset) => prevOffset + 10);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore]
+  );
 
   useEffect(() => {
     if (!isLoading) {
@@ -277,7 +287,7 @@ const JobListCard = () => {
   }, [isLoading]);
   return (
     <>
-      {isLoading ? (
+      {isLoading && offset === 0 ? (
         <CustomLoader />
       ) : (
         data &&
@@ -297,7 +307,7 @@ const JobListCard = () => {
           }
           return (
             <div
-              onScroll={() => handleScroll()}
+              ref={lastJobCardRef}
               className={`job-list-card ${isLoaded ? "loaded" : ""}`}
               key={jobCard.id}
             >
@@ -363,6 +373,7 @@ const JobListCard = () => {
           );
         })
       )}
+      {isLoading && <CustomLoader />}
     </>
   );
 };
