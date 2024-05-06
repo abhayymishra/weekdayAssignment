@@ -1,6 +1,15 @@
 # Candidate Application Platform - WeekDay
 
+* Deployed at  - https://job-listing-by-weekday.netlify.app/
+
 * Its a smooth and engaging UI , also enhancing the user-experience , given proper loading indicator while data fetching at each point.Right now , filtering functionality is not working properly , but I will implement it.
+
+* Responsiveness handled well.
+* Infinite scrolling implemented for seamless experience.
+* All the data displayed in job list card.
+* Well-Performant Application.
+
+* Tech-Stack Use - Redux , React , Material UI , vanilla CSS.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

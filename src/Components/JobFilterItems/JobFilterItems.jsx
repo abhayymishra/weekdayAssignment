@@ -6,12 +6,7 @@ const JobFilterItems = () => {
   return (
     <>
       <header>
-        <JobFilterSingleCriteria />
-        <JobFilterSingleCriteria />
-        <JobFilterSingleCriteria />
-        <JobFilterSingleCriteria />
-        <JobFilterSingleCriteria />
-        <JobFilterSingleCriteria />
+     
       </header>
     </>
   );

@@ -4,4 +4,5 @@ header {
   flex-wrap: wrap;
   margin: 60px auto 0 auto;
   max-width: 1160px;
+  justify-content: center;
 }

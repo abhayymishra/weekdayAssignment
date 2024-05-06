@@ -16,5 +16,6 @@
 .MuiPaper-elevation {
   top: 126px !important;
   width: 149px !important;
-  left: 188px !important;
+  left: 270px !important;
+  position: absolute !important;
 }
