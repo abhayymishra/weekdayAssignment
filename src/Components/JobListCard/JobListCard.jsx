@@ -262,17 +262,15 @@ const JobListCard = () => {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(10);
   const observer = useRef();
-  // const [isExpanded, setIsExpanded] = useState(false);
-  const [expandedIds, setExpandedIds] = useState({});
 
-  // const handleToggleExpand = () => {
-  //   setIsExpanded(!isExpanded);
-  // };
+  const [expandedIds, setExpandedIds] = useState([]);
+
   const handleToggleExpand = (id) => {
-    setExpandedIds((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
+    if (expandedIds.includes(id)) {
+      setExpandedIds(expandedIds.filter((expandedId) => expandedId !== id));
+    } else {
+      setExpandedIds([...expandedIds, id]);
+    }
   };
 
   useEffect(() => {
@@ -308,7 +306,7 @@ const JobListCard = () => {
       ) : (
         data &&
         data.slice(0, limit).map((jobCard) => {
-          const isExpanded = expandedIds[jobCard.id];
+          const isExpanded = expandedIds.includes(jobCard.id);
           if (
             !jobCard.companyName ||
             !jobCard.jobRole ||
