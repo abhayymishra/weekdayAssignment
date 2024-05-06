@@ -263,14 +263,13 @@ const JobListCard = () => {
   const [limit, setLimit] = useState(10);
   const observer = useRef();
 
-  const [expandedIds, setExpandedIds] = useState([]);
+  const [expandedStates, setExpandedStates] = useState({});
 
   const handleToggleExpand = (id) => {
-    if (expandedIds.includes(id)) {
-      setExpandedIds(expandedIds.filter((expandedId) => expandedId !== id));
-    } else {
-      setExpandedIds([...expandedIds, id]);
-    }
+    setExpandedStates((prevExpandedStates) => ({
+      ...prevExpandedStates,
+      [id]: !prevExpandedStates[id],
+    }));
   };
 
   useEffect(() => {
@@ -306,7 +305,8 @@ const JobListCard = () => {
       ) : (
         data &&
         data.slice(0, limit).map((jobCard) => {
-          const isExpanded = expandedIds.includes(jobCard.id);
+          // const isExpanded = expandedIds.includes(jobCard.id);
+          const isExpanded = expandedStates[jobCard.id] || false;
           if (
             !jobCard.companyName ||
             !jobCard.jobRole ||
@@ -343,7 +343,7 @@ const JobListCard = () => {
                   </div>
                 </div>
                 <p className="estimated-salary">
-                  Estimated Salary: ₹{jobCard.minJdSalary} - ₹
+                  Estimated Salary: {jobCard.salaryCurrencyCode}&nbsp;{jobCard.minJdSalary} - {jobCard.salaryCurrencyCode}&nbsp;
                   {jobCard.maxJdSalary} LPA{" "}
                   <span aria-label="Offered salary range" class="">
                     {" "}
@@ -400,6 +400,8 @@ const JobListCard = () => {
     </>
   );
 };
+
+
 
 export default JobListCard;
 
