@@ -258,12 +258,18 @@ const JobListCard = () => {
   );
   const [isLoaded, setIsLoaded] = useState(false);
   const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState(10);
   const observer = useRef();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleToggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   useEffect(() => {
     setIsLoaded(false);
-    dispatch(fetchJobData({ limit: 10, offset }));
-  }, [dispatch, offset]);
+    dispatch(fetchJobData({ limit, offset }));
+  }, [dispatch, offset, limit]);
   console.log(data);
 
   const lastJobCardRef = useCallback(
@@ -273,6 +279,7 @@ const JobListCard = () => {
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
           setOffset((prevOffset) => prevOffset + 10);
+          setLimit((prevLimit) => prevLimit + 10);
         }
       });
       if (node) observer.current.observe(node);
@@ -291,7 +298,7 @@ const JobListCard = () => {
         <CustomLoader />
       ) : (
         data &&
-        data.map((jobCard) => {
+        data.slice(0, limit).map((jobCard) => {
           if (
             !jobCard.companyName ||
             !jobCard.jobRole ||
@@ -336,7 +343,11 @@ const JobListCard = () => {
                   </span>
                   <br />
                 </p>
-                <div className="about-company-content">
+                <div
+                  className={`about-company-content ${
+                    isExpanded ? "expanded" : ""
+                  }`}
+                >
                   <div>
                     <p>About Company:</p>
                     <div className="about-company-whole-content">
@@ -352,9 +363,10 @@ const JobListCard = () => {
                   </div>
                 </div>
                 <div className="view-job-link">
-                  <a href={jobCard.jdLink} className="fw-400">
-                    View job
-                  </a>
+                  <button className="fw-400" onClick={handleToggleExpand}>
+                    {" "}
+                    {isExpanded ? "Read Less.." : "Read More.."}
+                  </button>
                 </div>
                 <div className="experience-required">
                   <h3>Minimum Experience</h3>
