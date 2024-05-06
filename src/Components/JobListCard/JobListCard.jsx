@@ -84,7 +84,7 @@ const JobListCard = () => {
               </div>
               <div className="full-job-details">
                 <div className="logo-with-company-name">
-                  <img src={jobCard.logoUrl} alt={jobCard.companyName} />
+                  <img src={jobCard.logoUrl} alt={jobCard.companyName} loading="lazy"/>
                   <div>
                     <div className="company-info">
                       <h3>{jobCard.companyName}</h3>
